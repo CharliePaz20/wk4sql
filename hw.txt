@@ -1,0 +1,69 @@
+DROP PROCEDURE IF EXIST years_worked;
+DELIMITER !!
+
+CREATE PROCEDURE years_worked(IN employee_number int, OUT years_worked int)
+BEGIN
+DECLARE start_year int;
+DECLARE cur_year int;
+
+SELECT year(e.hire_date), year(e.to_date)
+INTO start_year, cur_year
+FROM employees e 
+LIMIT 1;
+IF cur_year = 9999 THEN
+SET cur_year = year(now));
+END IF;
+
+
+SELECT cur_year - start_ year INTO years_worked;
+
+END !!
+
+DELIMITER !!
+
+DECLARE emp_bonus int(5);
+
+CALL years_worked(10035, @years);
+SELECT @years;
+
+**********************************************************************************************
+
+
+
+DROP PROCEDURE IF EXIST emp_bonus;
+DELIMITER !!
+
+CREATE PROCEDURE emp_bonus(IN employee_number int,)
+
+
+
+IF @years > 5 THEN
+SET emp_bonus ="5000";
+ELSEIF @years > 10 THEN
+SET emp_bonus ="10000";
+ELSE @years > 20 THEN
+SET emp_bonus ="20000";
+ENDIF;
+
+END!!
+
+DELIMITER !!
+
+CALL emp_bonus(10010);
+
+SELECT @years AS years, emp_bonus AS Bonus
+FROM employees e
+e.emp_no = employee_number
+LIMIT 1;
+END!!
+
+DELIMITER;
+Call emp_bonus(10002);
+
+//
+if/else: creates the basic conditional statement and returns results based on those conditionals.
+ SET: set the data.
+ ELESIF: allows you to add to else statement
+ THEN if it meets else if statement it continues to THEN and finishes statement
+
+
